@@ -9,6 +9,7 @@ export default class Student extends React.Component{
                 <h3>{xyz.email}</h3>
                 <h3>{xyz.birthday}</h3>
                 <p>{xyz.tel}</p>
+                <p>Mark: {xyz.mark}</p>
             </div>
         )
     }

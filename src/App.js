@@ -5,10 +5,13 @@ import Classroom from './components/Classroom';
 
 function App() {
   return (
-    <div>
+    <div className='row'>
+      <div className='col-3'></div>
+      <div className='col-6'>
       <h1>DEMO ReactJS</h1>
       <Header/>
       <Classroom/>
+    </div>
     </div>
   );
 }
