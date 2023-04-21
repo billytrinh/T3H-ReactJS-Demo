@@ -7,6 +7,7 @@ import Features from "../components/homepage/Features";
 import Banner from "../components/homepage/Banner";
 import LatestProduct from "../components/homepage/LatestProduct";
 import Blog from "../components/homepage/Blog";
+import Hero from "../components/Hero";
 export default class HomePage extends React.Component{
     constructor(props){
         super(props);
@@ -15,6 +16,7 @@ export default class HomePage extends React.Component{
     render(){
        return  (
         <div>
+            <Hero page="home"/>
             <Categories/>
             <Features/>
             <Banner/>
