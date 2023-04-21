@@ -4,31 +4,83 @@ import { NavLink } from "react-router-dom";
 class Header extends React.Component{
     render(){
         return (
-            <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                <div class="container">
-                    <a class="navbar-brand" href="#">Navbar</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <NavLink to="/" className="nav-link">Home</NavLink>
-                        </li>
-                        <li class="nav-item">
-                            <NavLink to="/search" className="nav-link">Search</NavLink>
-                        </li>
-                        <li class="nav-item">
-                            <NavLink to="/product" className="nav-link">Product</NavLink>
-                        </li>
-                    </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
+            <header className="header">
+        <div className="header__top">
+            <div className="container">
+                <div className="row">
+                    <div className="col-lg-6 col-md-6">
+                        <div className="header__top__left">
+                            <ul>
+                                <li><i className="fa fa-envelope"></i> hello@colorlib.com</li>
+                                <li>Free Shipping for all Order of $99</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div className="col-lg-6 col-md-6">
+                        <div className="header__top__right">
+                            <div className="header__top__right__social">
+                                <a href="#"><i className="fa fa-facebook"></i></a>
+                                <a href="#"><i className="fa fa-twitter"></i></a>
+                                <a href="#"><i className="fa fa-linkedin"></i></a>
+                                <a href="#"><i className="fa fa-pinterest-p"></i></a>
+                            </div>
+                            <div className="header__top__right__language">
+                                <img src="/img/language.png" alt="" />
+                                <div>English</div>
+                                <span className="arrow_carrot-down"></span>
+                                <ul>
+                                    <li><a href="#">Spanis</a></li>
+                                    <li><a href="#">English</a></li>
+                                </ul>
+                            </div>
+                            <div className="header__top__right__auth">
+                                <a href="#"><i className="fa fa-user"></i> Login</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                </nav>
+            </div>
+        </div>
+        <div className="container">
+            <div className="row">
+                <div className="col-lg-3">
+                    <div className="header__logo">
+                        <NavLink to="/"><img src="/img/logo.png" alt=""/></NavLink>
+                    </div>
+                </div>
+                <div className="col-lg-6">
+                    <nav className="header__menu">
+                        <ul>
+                            <li className="active"><NavLink to="/">Home</NavLink></li>
+                            <li><NavLink to="/shop">Shop</NavLink></li>
+                            <li><a href="#">Pages</a>
+                                <ul className="header__menu__dropdown">
+                                    <li><a href="./shop-details.html">Shop Details</a></li>
+                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
+                                    <li><a href="./checkout.html">Check Out</a></li>
+                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./blog.html">Blog</a></li>
+                            <li><a href="./contact.html">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div className="col-lg-3">
+                    <div className="header__cart">
+                        <ul>
+                            <li><a href="#"><i className="fa fa-heart"></i> <span>1</span></a></li>
+                            <li><a href="#"><i className="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                        </ul>
+                        <div className="header__cart__price">item: <span>$150.00</span></div>
+                    </div>
+                </div>
+            </div>
+            <div className="humberger__open">
+                <i className="fa fa-bars"></i>
+            </div>
+        </div>
+    </header>
         );
     }
 }
