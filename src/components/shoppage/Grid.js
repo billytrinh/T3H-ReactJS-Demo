@@ -1,5 +1,6 @@
 import React from "react";
 import Paginator from "../Paginator";
+import api from "../../api";
 export default class Grid extends React.Component{
     constructor(props){
         super(props);
@@ -11,37 +12,34 @@ export default class Grid extends React.Component{
         }
         this.changePage = this.changePage.bind(this);
     }
-    componentDidMount(){
+    async componentDidMount(){
         const limit = this.state.limit;
-        const url = "https://dummyjson.com/products?limit="+limit;
-        fetch(url).then(rs=>rs.json())
-        .then(rs=>{
+        const url = "products?limit="+limit;
+        try{
+            const rs = await api.get(url);
             this.setState({
-                products: rs.products,
-                total: rs.total,
-                skip: rs.skip,
-                limit:rs.limit
+                products: rs.data.products,
+                total: rs.data.total,
+                skip: rs.data.skip,
+                limit:rs.data.limit
             })
-        })
-        .catch(err=>{
-            console.log(err);
-        })
+        }catch(err){
+           alert("Error...");     
+        }
+        
     }
     changePage(skip){
         const limit = this.state.limit;
-        const url = `https://dummyjson.com/products?limit=${limit}&skip=${skip}`;
-        fetch(url).then(rs=>rs.json())
+        const url = `products?limit=${limit}&skip=${skip}`;
+        api.get(url)
         .then(rs=>{
             this.setState({
-                products: rs.products,
-                total: rs.total,
-                skip: rs.skip,
-                limit:rs.limit
+                products: rs.data.products,
+                total: rs.data.total,
+                skip: rs.data.skip,
+                limit:rs.data.limit
             })
-        })
-        .catch(err=>{
-            console.log(err);
-        })
+        }).catch(err=>console.log(err));
     }
     render(){
         const products  = this.state.products;
