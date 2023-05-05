@@ -1,6 +1,7 @@
 import React from "react";
 import api from "../api";
-export default class ProductPage extends React.Component{
+import withRouter from "../withRouter";
+class ProductPage extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -10,7 +11,8 @@ export default class ProductPage extends React.Component{
         }
     }
     async componentDidMount(){
-        const url = "products/1";
+        const id = this.props.params.id;
+        const url = "products/"+id;
         const rs = await api.get(url);
         this.setState({
             product: rs.data
@@ -163,3 +165,4 @@ export default class ProductPage extends React.Component{
         );
     }
 }
+export default withRouter(ProductPage);
