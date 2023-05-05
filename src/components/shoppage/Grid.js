@@ -1,6 +1,7 @@
 import React from "react";
 import Paginator from "../Paginator";
 import api from "../../api";
+import { NavLink } from "react-router-dom";
 export default class Grid extends React.Component{
     constructor(props){
         super(props);
@@ -28,18 +29,20 @@ export default class Grid extends React.Component{
         }
         
     }
-    changePage(skip){
+    async changePage(skip){
         const limit = this.state.limit;
         const url = `products?limit=${limit}&skip=${skip}`;
-        api.get(url)
-        .then(rs=>{
+        try {
+            const rs = await api.get(url);
             this.setState({
                 products: rs.data.products,
                 total: rs.data.total,
                 skip: rs.data.skip,
                 limit:rs.data.limit
-            })
-        }).catch(err=>console.log(err));
+            });
+        } catch (error) {
+            
+        }     
     }
     render(){
         const products  = this.state.products;
@@ -87,7 +90,7 @@ export default class Grid extends React.Component{
                                         </ul>
                                     </div>
                                     <div className="product__item__text">
-                                        <h6><a href="#">{v.title}</a></h6>
+                                        <h6><NavLink to={"/detail/"+v.id}>{v.title}</NavLink></h6>
                                         <h5>${v.price}</h5>
                                     </div>
                                 </div>
