@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router-dom";
 
 import Footer from "./components/Footer";
 import Shop from "./pages/Shop";
+import FireBasePage from "./pages/FireBasePage";
 class App extends React.Component{
     render(){
       return (
@@ -18,6 +19,7 @@ class App extends React.Component{
           <Routes>
               <Route path="/" element={<HomePage/>}/>
               <Route path="/shop" element={<Shop/>}/>
+              <Route path="/fire-base" element={<FireBasePage/>}/>
               <Route path="/detail/:id" element={<ProductPage/>}/>
           </Routes>
           <Footer/>
