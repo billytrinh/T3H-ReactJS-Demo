@@ -1,7 +1,7 @@
 import React,{useEffect, useState} from "react";
 import api from "../api";
 import UserContext from "../context/UserContext";
-function Cart(props){
+const Cart = (props)=>{
     const [count,setCount] = useState(0);
     const [products,setProducts] = useState([]);
     const upCount = ()=>{
@@ -23,11 +23,11 @@ function Cart(props){
     },[count]);// chỉ chạy khi có sự thay đổi của state count
 
     // context
-    const {color} = React.useContext(UserContext);
+    const {data} = React.useContext(UserContext);
     return (
         <section className="product spad">
             <div className="container">
-                <h1 style={{color:color}}>Cart page</h1>
+                <h1 style={{color:data.color}}>Cart page</h1>
                 <h2>Total products: {count}</h2>
                 <button type="button" onClick={upCount} className="btn btn-primary">Add Product</button>
                 <h2>Danh sách sản phẩm:</h2>

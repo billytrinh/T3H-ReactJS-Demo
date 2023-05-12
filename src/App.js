@@ -10,9 +10,11 @@ import FireBasePage from "./pages/FireBasePage";
 import Cart from "./pages/Cart";
 import { UserProvider } from "./context/UserContext";
 function App(){
-      const color = "green";
+      const data = {
+        color:"green"
+      };
       return (
-        <UserProvider value={{color:color}}>
+        <UserProvider value={{data:data}}>
         <div>
           <div id="preloder" style={{display:"none"}}>
             <div className="loader"></div>
