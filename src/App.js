@@ -7,9 +7,12 @@ import { Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer";
 import Shop from "./pages/Shop";
 import FireBasePage from "./pages/FireBasePage";
-class App extends React.Component{
-    render(){
+import Cart from "./pages/Cart";
+import { UserProvider } from "./context/UserContext";
+function App(){
+      const color = "green";
       return (
+        <UserProvider value={{color:color}}>
         <div>
           <div id="preloder" style={{display:"none"}}>
             <div className="loader"></div>
@@ -21,10 +24,12 @@ class App extends React.Component{
               <Route path="/shop" element={<Shop/>}/>
               <Route path="/fire-base" element={<FireBasePage/>}/>
               <Route path="/detail/:id" element={<ProductPage/>}/>
+              <Route path="/cart" element={<Cart/>}/>
           </Routes>
           <Footer/>
         </div>
+        </UserProvider>
       );
-    }
+    
 }
 export default App;

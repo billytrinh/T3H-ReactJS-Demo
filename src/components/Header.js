@@ -54,6 +54,7 @@ class Header extends React.Component{
                             <li className="active"><NavLink to="/">Home</NavLink></li>
                             <li><NavLink to="/shop">Shop</NavLink></li>
                             <li><NavLink to="/fire-base">Firebase demo</NavLink></li>
+                            <li><NavLink to="/cart">Cart</NavLink></li>
                             <li><a href="#">Pages</a>
                                 <ul className="header__menu__dropdown">
                                     <li><a href="./shop-details.html">Shop Details</a></li>

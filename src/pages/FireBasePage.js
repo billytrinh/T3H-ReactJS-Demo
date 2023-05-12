@@ -54,6 +54,22 @@ export default class FireBasePage extends React.Component{
        
         return false;
     }
+
+    updateProduct(){
+        try{
+            const id = "87Up1Ib6BMaDsLIyALB8";
+            const conn = db.collection("products").doc(id);
+            conn.update({
+                name:"Bánh chưng",
+                price:26,
+                qty:14,
+                thumbnail:"img/product/product-2.jpg"
+            });
+           // conn.delete();
+        }catch(err){
+
+        }
+    }
     render(){
         const products = this.state.products;
         return (
