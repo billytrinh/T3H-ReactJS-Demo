@@ -8,9 +8,18 @@ const Cart = (props)=>{
         setCount(count+1); // this.setState({count:count+1})
     }
     const getProducts = async ()=>{
-        const url =  "products?limit=5";
-        const rs = await api.get(url);
-        setProducts(rs.data.products);
+        try{
+            const url =  "products?limit=5";
+            const rs = await api.get(url);
+            const products = rs.data.products.map(e=>{
+                e.qty=1;
+                return e;
+            });
+            setProducts(products);
+        }catch(err){
+
+        }
+        
     }
     useEffect(()=>{
         getProducts();
@@ -57,12 +66,12 @@ const Cart = (props)=>{
                                             <td className="shoping__cart__quantity">
                                                 <div className="quantity">
                                                     <div className="pro-qty">
-                                                        <input type="text" value="1"/>
+                                                        <input type="text" value={v.qty}/>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td className="shoping__cart__total">
-                                                ${v.price * 1}
+                                                ${v.price * v.qty}
                                             </td>
                                             <td className="shoping__cart__item__close">
                                                 <span className="icon_close"></span>
