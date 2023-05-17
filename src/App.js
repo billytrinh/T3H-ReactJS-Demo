@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 import HomePage from "./pages/HomePage"
 import ProductPage from "./pages/ProductPage";
@@ -11,7 +11,10 @@ import Cart from "./pages/Cart";
 import { UserProvider } from "./context/UserContext";
 import store from "./context/store";
 function App(){
-      const [state,setState] = useState(store);
+      const localState = localStorage.getItem("state")
+                            ?JSON.parse(localStorage.getItem("state"))
+                            :store;
+      const [state,setState] = useState(localState);
       return (
         <UserProvider value={{state,setState}}>
         <div>

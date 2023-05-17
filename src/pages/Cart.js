@@ -3,37 +3,30 @@ import api from "../api";
 import UserContext from "../context/UserContext";
 const Cart = (props)=>{
     const [count,setCount] = useState(0);
-    // const [products,setProducts] = useState([]);
+    const {state,setState} = React.useContext(UserContext);
+    const [products,setProducts] = useState(state.cart);
+    
     const upCount = ()=>{
-        setCount(count+1); // this.setState({count:count+1})
+        setCount(count+1); 
     }
-    // const getProducts = async ()=>{
-    //     try{
-    //         const url =  "products?limit=5";
-    //         const rs = await api.get(url);
-    //         const products = rs.data.products.map(e=>{
-    //             e.qty=1;
-    //             return e;
-    //         });
-    //         setProducts(products);
-    //     }catch(err){
-
-    //     }
-        
-    // }
-    useEffect(()=>{
-      //  getProducts();
-    },[]); // componentDidMount
-    useEffect(()=>{
-        console.log("B");
-    });// componentDidUpdate
-    useEffect(()=>{
-        console.log("C");
-    },[count]);// chỉ chạy khi có sự thay đổi của state count
-
+    
     // context
-    const {state} = React.useContext(UserContext);
-    const products = state.cart;
+    const updateCart = ()=>{
+        setProducts(state.cart);
+    }
+    const removeCart = (product)=>{
+        const new_cart = [];
+        state.cart.map(e=>{
+            if(e.id != product.id){
+                new_cart.push(e);
+            }
+        })
+        state.cart = new_cart;
+        setState(state);
+        localStorage.setItem("state",JSON.stringify(state));   
+        updateCart();
+    }
+    
     return (
         <section className="product spad">
             <div className="container">
@@ -56,7 +49,7 @@ const Cart = (props)=>{
                                 {
                                     products.map((v,k)=>{
                                        return (
-                                        <tr>
+                                        <tr key={k}>
                                             <td className="shoping__cart__item">
                                                 <img width={100} src={v.thumbnail} alt=""/>
                                                 <h5>{v.title}</h5>
@@ -75,7 +68,7 @@ const Cart = (props)=>{
                                                 ${v.price * v.qty}
                                             </td>
                                             <td className="shoping__cart__item__close">
-                                                <span className="icon_close"></span>
+                                                <span onClick={()=>{removeCart(v)}} className="icon_close"></span>
                                             </td>
                                         </tr>
                                        )     

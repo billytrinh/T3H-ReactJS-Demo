@@ -41,9 +41,10 @@ function Grid(props){
             product.qty = 1;
             state.cart.push(product);
         }
-        setState(state);    
+        setState(state); 
+        localStorage.setItem("state",JSON.stringify(state));   
     }
-
+    
     return (
         <div className="col-lg-9 col-md-7">
         <div className="filter__item">
