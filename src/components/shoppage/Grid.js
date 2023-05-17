@@ -7,31 +7,24 @@ import { NavLink } from "react-router-dom";
     const [total,setTotal] = useState(0);
     const [skip,setSkip] = useState(0);
     const [limit,setLimit] = useState(12);
-    useEffect(async ()=>{
-            const url = "products?limit="+limit;
-            try{
-                const rs = await api.get(url);
-                setProducts(rs.data.products);
-                setTotal(rs.data.total);
-                setSkip(rs.data.skip);
-                setLimit(rs.data.limit);
-            }catch(err){
-               alert("Error...");     
-            }
-            
-        
-    },[]);
-    const changePage = async (skip)=>{
+    const getData = async ()=>{
         const url = `products?limit=${limit}&skip=${skip}`;
         try {
             const rs = await api.get(url);
             setProducts(rs.data.products);
-                setTotal(rs.data.total);
-                setSkip(rs.data.skip);
-                setLimit(rs.data.limit);
+            setTotal(rs.data.total);
+            setSkip(rs.data.skip);
+            setLimit(rs.data.limit);
         } catch (error) {
             
-        }     
+        }  
+    }
+    useEffect(()=>{    
+        getData();
+    },[]);
+    const changePage =  (skip)=>{
+        setSkip(skip);
+        getData();
     }
     return (
         <div className="col-lg-9 col-md-7">
