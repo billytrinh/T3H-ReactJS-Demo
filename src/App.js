@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./components/Header";
 import HomePage from "./pages/HomePage"
 import ProductPage from "./pages/ProductPage";
@@ -9,12 +9,11 @@ import Shop from "./pages/Shop";
 import FireBasePage from "./pages/FireBasePage";
 import Cart from "./pages/Cart";
 import { UserProvider } from "./context/UserContext";
+import store from "./context/store";
 function App(){
-      const data = {
-        color:"green"
-      };
+      const [state,setState] = useState(store);
       return (
-        <UserProvider value={{data:data}}>
+        <UserProvider value={{state,setState}}>
         <div>
           <div id="preloder" style={{display:"none"}}>
             <div className="loader"></div>

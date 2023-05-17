@@ -3,26 +3,26 @@ import api from "../api";
 import UserContext from "../context/UserContext";
 const Cart = (props)=>{
     const [count,setCount] = useState(0);
-    const [products,setProducts] = useState([]);
+    // const [products,setProducts] = useState([]);
     const upCount = ()=>{
         setCount(count+1); // this.setState({count:count+1})
     }
-    const getProducts = async ()=>{
-        try{
-            const url =  "products?limit=5";
-            const rs = await api.get(url);
-            const products = rs.data.products.map(e=>{
-                e.qty=1;
-                return e;
-            });
-            setProducts(products);
-        }catch(err){
+    // const getProducts = async ()=>{
+    //     try{
+    //         const url =  "products?limit=5";
+    //         const rs = await api.get(url);
+    //         const products = rs.data.products.map(e=>{
+    //             e.qty=1;
+    //             return e;
+    //         });
+    //         setProducts(products);
+    //     }catch(err){
 
-        }
+    //     }
         
-    }
+    // }
     useEffect(()=>{
-        getProducts();
+      //  getProducts();
     },[]); // componentDidMount
     useEffect(()=>{
         console.log("B");
@@ -32,11 +32,12 @@ const Cart = (props)=>{
     },[count]);// chỉ chạy khi có sự thay đổi của state count
 
     // context
-    const {data} = React.useContext(UserContext);
+    const {state} = React.useContext(UserContext);
+    const products = state.cart;
     return (
         <section className="product spad">
             <div className="container">
-                <h1 style={{color:data.color}}>Cart page</h1>
+                <h1>Cart page</h1>
                 <h2>Total products: {count}</h2>
                 <button type="button" onClick={upCount} className="btn btn-primary">Add Product</button>
                 <h2>Danh sách sản phẩm:</h2>

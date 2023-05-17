@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import Paginator from "../Paginator";
 import api from "../../api";
 import { NavLink } from "react-router-dom";
- function Grid(props){
+import UserContext from "../../context/UserContext";
+function Grid(props){
     const [products,setProducts] = useState([]);
     const [total,setTotal] = useState(0);
     const [skip,setSkip] = useState(0);
@@ -26,6 +27,12 @@ import { NavLink } from "react-router-dom";
         setSkip(skip);
         getData();
     }
+    const {state,setState} = React.useContext(UserContext);
+    const addToCart = (product)=>{
+        state.cart.push(product);
+        setState(state);    
+    }
+
     return (
         <div className="col-lg-9 col-md-7">
         <div className="filter__item">
@@ -63,7 +70,7 @@ import { NavLink } from "react-router-dom";
                                     <ul className="product__item__pic__hover">
                                         <li><a href="#"><i className="fa fa-heart"></i></a></li>
                                         <li><a href="#"><i className="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i className="fa fa-shopping-cart"></i></a></li>
+                                        <li><a href="javascript:void(0);" onClick={()=>{addToCart(v)}}><i className="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                 </div>
                                 <div className="product__item__text">
