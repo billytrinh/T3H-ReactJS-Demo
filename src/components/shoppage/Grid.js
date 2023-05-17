@@ -29,7 +29,18 @@ function Grid(props){
     }
     const {state,setState} = React.useContext(UserContext);
     const addToCart = (product)=>{
-        state.cart.push(product);
+        let check = false;
+        state.cart.map(e=>{
+            if(e.id == product.id){
+                e.qty = e.qty+1;
+                check =  true;    
+            }
+            return e;
+        })
+        if(check== false){
+            product.qty = 1;
+            state.cart.push(product);
+        }
         setState(state);    
     }
 
