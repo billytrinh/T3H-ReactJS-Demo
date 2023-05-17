@@ -2,22 +2,19 @@ import React, { useEffect, useState } from "react";
 import Paginator from "../Paginator";
 import api from "../../api";
 import { NavLink } from "react-router-dom";
-export default function Grid(){
+ function Grid(props){
     const [products,setProducts] = useState([]);
     const [total,setTotal] = useState(0);
     const [skip,setSkip] = useState(0);
     const [limit,setLimit] = useState(12);
     useEffect(async ()=>{
-            const limit = this.state.limit;
             const url = "products?limit="+limit;
             try{
                 const rs = await api.get(url);
-                this.setState({
-                    products: rs.data.products,
-                    total: rs.data.total,
-                    skip: rs.data.skip,
-                    limit:rs.data.limit
-                })
+                setProducts(rs.data.products);
+                setTotal(rs.data.total);
+                setSkip(rs.data.skip);
+                setLimit(rs.data.limit);
             }catch(err){
                alert("Error...");     
             }
@@ -28,17 +25,14 @@ export default function Grid(){
         const url = `products?limit=${limit}&skip=${skip}`;
         try {
             const rs = await api.get(url);
-            this.setState({
-                products: rs.data.products,
-                total: rs.data.total,
-                skip: rs.data.skip,
-                limit:rs.data.limit
-            });
+            setProducts(rs.data.products);
+                setTotal(rs.data.total);
+                setSkip(rs.data.skip);
+                setLimit(rs.data.limit);
         } catch (error) {
             
         }     
     }
-
     return (
         <div className="col-lg-9 col-md-7">
         <div className="filter__item">
@@ -90,8 +84,9 @@ export default function Grid(){
             }
             
         </div>
-        <Paginator total={total} skip={skip} limit={limit} changePage={this.changePage} />
+        <Paginator total={total} skip={skip} limit={limit} changePage={changePage} />
     </div> 
     )
     
 }
+export default Grid;
