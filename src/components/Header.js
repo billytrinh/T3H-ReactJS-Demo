@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import UserContext from "../context/UserContext";
 
-class Header extends React.Component{
-    render(){
+function Header(props){
+    const {state,dispatch} = useContext(UserContext);
+
         return (
             <header className="header">
         <div className="header__top">
@@ -72,7 +74,7 @@ class Header extends React.Component{
                     <div className="header__cart">
                         <ul>
                             <li><a href="#"><i className="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="#"><i className="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href="#"><i className="fa fa-shopping-bag"></i> <span>{state.cart.length}</span></a></li>
                         </ul>
                         <div className="header__cart__price">item: <span>$150.00</span></div>
                     </div>
@@ -84,6 +86,6 @@ class Header extends React.Component{
         </div>
     </header>
         );
-    }
+    
 }
 export default Header;

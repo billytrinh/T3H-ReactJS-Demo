@@ -1,5 +1,6 @@
 const store  = {
     cart: [],
-    search:""
+    search:"",
+    favourites:[]
 }
 export default store;

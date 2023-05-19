@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import Header from "./components/Header";
 import HomePage from "./pages/HomePage"
 import ProductPage from "./pages/ProductPage";
@@ -10,13 +10,14 @@ import FireBasePage from "./pages/FireBasePage";
 import Cart from "./pages/Cart";
 import { UserProvider } from "./context/UserContext";
 import store from "./context/store";
+import reducer from "./context/reducer";
 function App(){
       const localState = localStorage.getItem("state")
                             ?JSON.parse(localStorage.getItem("state"))
                             :store;
-      const [state,setState] = useState(localState);
+      const [state,dispatch] = useReducer(reducer,localState);
       return (
-        <UserProvider value={{state,setState}}>
+        <UserProvider value={{state,dispatch}}>
         <div>
           <div id="preloder" style={{display:"none"}}>
             <div className="loader"></div>

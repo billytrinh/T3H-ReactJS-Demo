@@ -3,17 +3,13 @@ import api from "../api";
 import UserContext from "../context/UserContext";
 const Cart = (props)=>{
     const [count,setCount] = useState(0);
-    const {state,setState} = React.useContext(UserContext);
-    const [products,setProducts] = useState(state.cart);
+    const {state,dispatch} = React.useContext(UserContext);
+    // const [products,setProducts] = useState(state.cart);
     
     const upCount = ()=>{
         setCount(count+1); 
     }
     
-    // context
-    const updateCart = ()=>{
-        setProducts(state.cart);
-    }
     const removeCart = (product)=>{
         const new_cart = [];
         state.cart.map(e=>{
@@ -22,9 +18,10 @@ const Cart = (props)=>{
             }
         })
         state.cart = new_cart;
-        setState(state);
+        // setState(state);
+        dispatch({type:"update_cart",payload:new_cart});
         localStorage.setItem("state",JSON.stringify(state));   
-        updateCart();
+        // updateCart();
     }
     
     return (
@@ -47,7 +44,7 @@ const Cart = (props)=>{
                             </thead>
                             <tbody>
                                 {
-                                    products.map((v,k)=>{
+                                    state.cart.map((v,k)=>{
                                        return (
                                         <tr key={k}>
                                             <td className="shoping__cart__item">

@@ -27,7 +27,7 @@ function Grid(props){
         setSkip(skip);
         getData();
     }
-    const {state,setState} = React.useContext(UserContext);
+    const {state,dispatch} = React.useContext(UserContext);
     const addToCart = (product)=>{
         let check = false;
         state.cart.map(e=>{
@@ -41,7 +41,8 @@ function Grid(props){
             product.qty = 1;
             state.cart.push(product);
         }
-        setState(state); 
+        dispatch({type:"update_cart",payload:state.cart});
+        
         localStorage.setItem("state",JSON.stringify(state));   
     }
     
