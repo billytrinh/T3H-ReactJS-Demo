@@ -1,8 +1,11 @@
 import React from "react";
-export default class Hero extends React.Component{
-
-    render(){
-        const page = this.props.page;
+import { useNavigate } from 'react-router-dom';
+export default function Hero(props){
+    const navigate = useNavigate();
+        const search = ()=>{
+            navigate('/shop');
+        }
+        const page = props.page;
         let html = "";
         if(page == "home"){
            html =   <section className="hero">
@@ -38,7 +41,7 @@ export default class Hero extends React.Component{
                                        <span className="arrow_carrot-down"></span>
                                    </div>
                                    <input type="text" placeholder="What do yo u need?"/>
-                                   <button type="submit" className="site-btn">SEARCH</button>
+                                   <button type="button" onClick={search} className="site-btn">SEARCH</button>
                                </form>
                            </div>
                            <div className="hero__search__phone">
@@ -117,5 +120,5 @@ export default class Hero extends React.Component{
         }
 
         return  html;
-    }
+    
 }
