@@ -16,10 +16,11 @@ function App(){
                             ?JSON.parse(localStorage.getItem("state"))
                             :store;
       const [state,dispatch] = useReducer(reducer,localState);
+      const display = state.isLoading?"block":"none";
       return (
         <UserProvider value={{state,dispatch}}>
         <div>
-          <div id="preloder" style={{display:"none"}}>
+          <div id="preloder" style={{display:display}}>
             <div className="loader"></div>
           </div>
           <Header/>  

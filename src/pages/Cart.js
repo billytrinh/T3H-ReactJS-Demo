@@ -20,6 +20,9 @@ const Cart = (props)=>{
         state.cart = new_cart;
         // setState(state);
         dispatch({type:"update_cart",payload:new_cart});
+        setTimeout(()=>{
+            dispatch({type:"hide_loading"});
+        },1000);
         localStorage.setItem("state",JSON.stringify(state));   
         // updateCart();
     }

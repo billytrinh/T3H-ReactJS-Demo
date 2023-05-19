@@ -1,6 +1,7 @@
 const store  = {
     cart: [],
     search:"",
-    favourites:[]
+    favourites:[],
+    isLoading:false
 }
 export default store;

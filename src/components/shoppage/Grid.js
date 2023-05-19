@@ -42,6 +42,9 @@ function Grid(props){
             state.cart.push(product);
         }
         dispatch({type:"update_cart",payload:state.cart});
+        setTimeout(()=>{
+            dispatch({type:"hide_loading"});
+        },1000);
         
         localStorage.setItem("state",JSON.stringify(state));   
     }
