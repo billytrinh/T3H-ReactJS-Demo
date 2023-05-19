@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import db from "../db";
+import { get } from "../services/firebase/product.firebase.service";
 export default class FireBasePage extends React.Component{
     constructor(props){
         super(props);
@@ -18,19 +19,8 @@ export default class FireBasePage extends React.Component{
     }
 
     async refresh(){
-        try{
-            const conn = db.collection("products");
-            const data = await conn.get();
-            const products = [];
-            data.docs.map(item=>{
-                const d = item.data();// day moi la du lieu cua tung product
-                d.id = item.id;// nap them id vao san pham
-                products.push(d);                 
-            });
-            this.setState({products:products});
-         }catch(err){
- 
-         }
+        const products = await get();
+        this.setState({products:products});
     }
 
     handleInput(event){

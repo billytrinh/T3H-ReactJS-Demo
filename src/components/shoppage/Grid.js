@@ -3,22 +3,18 @@ import Paginator from "../Paginator";
 import api from "../../api";
 import { NavLink } from "react-router-dom";
 import UserContext from "../../context/UserContext";
+import { get } from "../../services/product.service";
 function Grid(props){
     const [products,setProducts] = useState([]);
     const [total,setTotal] = useState(0);
     const [skip,setSkip] = useState(0);
     const [limit,setLimit] = useState(12);
     const getData = async ()=>{
-        const url = `products?limit=${limit}&skip=${skip}`;
-        try {
-            const rs = await api.get(url);
-            setProducts(rs.data.products);
-            setTotal(rs.data.total);
-            setSkip(rs.data.skip);
-            setLimit(rs.data.limit);
-        } catch (error) {
-            
-        }  
+        const rs = await get(limit,skip);
+        setProducts(rs.products);
+        setTotal(rs.total);
+        setLimit(rs.limit);
+        setSkip(rs.skip);
     }
     useEffect(()=>{    
         getData();
